@@ -1,70 +1,65 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Policies;
 
-use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\ModulMgt;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\User;
 
 class ModulMgtPolicy
 {
-    use HandlesAuthorization;
-    
-    public function viewAny(AuthUser $authUser): bool
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
     {
-        return $authUser->can('ViewAny:ModulMgt');
+        return $user->hasPermissionTo('portal:modul_mgt:view_any');
     }
 
-    public function view(AuthUser $authUser, ModulMgt $modulMgt): bool
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, ModulMgt $modulMgt): bool
     {
-        return $authUser->can('View:ModulMgt');
+        return $user->hasPermissionTo('portal:modul_mgt:view');
     }
 
-    public function create(AuthUser $authUser): bool
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
     {
-        return $authUser->can('Create:ModulMgt');
+        return $user->hasPermissionTo('portal:modul_mgt:create');
     }
 
-    public function update(AuthUser $authUser, ModulMgt $modulMgt): bool
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, ModulMgt $modulMgt): bool
     {
-        return $authUser->can('Update:ModulMgt');
+        return $user->hasPermissionTo('portal:modul_mgt:update');
     }
 
-    public function delete(AuthUser $authUser, ModulMgt $modulMgt): bool
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, ModulMgt $modulMgt): bool
     {
-        return $authUser->can('Delete:ModulMgt');
+        return $user->hasPermissionTo('portal:modul_mgt:delete');
     }
 
-    public function restore(AuthUser $authUser, ModulMgt $modulMgt): bool
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, ModulMgt $modulMgt): bool
     {
-        return $authUser->can('Restore:ModulMgt');
+        return $user->hasPermissionTo('portal:modul_mgt:restore');
     }
 
-    public function forceDelete(AuthUser $authUser, ModulMgt $modulMgt): bool
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, ModulMgt $modulMgt): bool
     {
-        return $authUser->can('ForceDelete:ModulMgt');
+        return $user->hasPermissionTo('portal:modul_mgt:force_delete');
     }
-
-    public function forceDeleteAny(AuthUser $authUser): bool
-    {
-        return $authUser->can('ForceDeleteAny:ModulMgt');
-    }
-
-    public function restoreAny(AuthUser $authUser): bool
-    {
-        return $authUser->can('RestoreAny:ModulMgt');
-    }
-
-    public function replicate(AuthUser $authUser, ModulMgt $modulMgt): bool
-    {
-        return $authUser->can('Replicate:ModulMgt');
-    }
-
-    public function reorder(AuthUser $authUser): bool
-    {
-        return $authUser->can('Reorder:ModulMgt');
-    }
-
 }

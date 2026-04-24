@@ -1,70 +1,65 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Policies;
 
-use Illuminate\Foundation\Auth\User as AuthUser;
 use App\Models\ContentMgt;
-use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\User;
 
 class ContentMgtPolicy
 {
-    use HandlesAuthorization;
-    
-    public function viewAny(AuthUser $authUser): bool
+    /**
+     * Determine whether the user can view any models.
+     */
+    public function viewAny(User $user): bool
     {
-        return $authUser->can('ViewAny:ContentMgt');
+        return $user->hasPermissionTo('portal:content_mgt:view_any');
     }
 
-    public function view(AuthUser $authUser, ContentMgt $contentMgt): bool
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user, ContentMgt $contentMgt): bool
     {
-        return $authUser->can('View:ContentMgt');
+        return $user->hasPermissionTo('portal:content_mgt:view');
     }
 
-    public function create(AuthUser $authUser): bool
+    /**
+     * Determine whether the user can create models.
+     */
+    public function create(User $user): bool
     {
-        return $authUser->can('Create:ContentMgt');
+        return $user->hasPermissionTo('portal:content_mgt:create');
     }
 
-    public function update(AuthUser $authUser, ContentMgt $contentMgt): bool
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user, ContentMgt $contentMgt): bool
     {
-        return $authUser->can('Update:ContentMgt');
+        return $user->hasPermissionTo('portal:content_mgt:update');
     }
 
-    public function delete(AuthUser $authUser, ContentMgt $contentMgt): bool
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user, ContentMgt $contentMgt): bool
     {
-        return $authUser->can('Delete:ContentMgt');
+        return $user->hasPermissionTo('portal:content_mgt:delete');
     }
 
-    public function restore(AuthUser $authUser, ContentMgt $contentMgt): bool
+    /**
+     * Determine whether the user can restore the model.
+     */
+    public function restore(User $user, ContentMgt $contentMgt): bool
     {
-        return $authUser->can('Restore:ContentMgt');
+        return $user->hasPermissionTo('portal:content_mgt:restore');
     }
 
-    public function forceDelete(AuthUser $authUser, ContentMgt $contentMgt): bool
+    /**
+     * Determine whether the user can permanently delete the model.
+     */
+    public function forceDelete(User $user, ContentMgt $contentMgt): bool
     {
-        return $authUser->can('ForceDelete:ContentMgt');
+        return $user->hasPermissionTo('portal:content_mgt:force_delete');
     }
-
-    public function forceDeleteAny(AuthUser $authUser): bool
-    {
-        return $authUser->can('ForceDeleteAny:ContentMgt');
-    }
-
-    public function restoreAny(AuthUser $authUser): bool
-    {
-        return $authUser->can('RestoreAny:ContentMgt');
-    }
-
-    public function replicate(AuthUser $authUser, ContentMgt $contentMgt): bool
-    {
-        return $authUser->can('Replicate:ContentMgt');
-    }
-
-    public function reorder(AuthUser $authUser): bool
-    {
-        return $authUser->can('Reorder:ContentMgt');
-    }
-
 }
