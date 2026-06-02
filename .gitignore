@@ -28,3 +28,6 @@ Thumbs.db
 /.codex
 /.cursor
 /.gemini
+*.md
+!AGENTS.md
+!README.md
